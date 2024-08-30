@@ -1,0 +1,13 @@
+Pizza Automat
+Bildschirm
+Nach kurzer Wartezeit bekommen die Leute Pizza
+Remote Bestellung
+PayPal
+
+
+Über welches System soll das Programm laufen?
+Webserver PHP, Javascript
+Hardware wird über Rest angesprochen
+Auf jedem Automaten ein Webserver
+Gastbestellung oder Login
+nicht verfügbare Pizzen sollen nicht auswählbar sein
