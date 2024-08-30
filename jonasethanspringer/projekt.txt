@@ -1,0 +1,18 @@
+The requirements of the "Customer"
+-Pizza Automat like a ATM (Stupid fucking idea it will be broken within a month, if the health issues are not coming first)
+-What API will be used
+-Tokens for machines to discern between machines
+-Central server to monitor material consumption and signals if a refill is needed
+-A alarm system for when damages are done to the machine
+-PayPal as payment system
+-Takes cash as well in some cases
+-What hardware should be used
+-What software is required
+-What can be gotten from the market and what needs to be done inhouse
+-What is the lifecycle of the software
+-How often will a update or renovation of the code be needed
+-What interfaces will be required
+-Each machine has a ubuntu web server (Not sure about this one)
+-Security for transactions are important.
+-Skimmer protection is also important
+-What is the routine when some error accrues
