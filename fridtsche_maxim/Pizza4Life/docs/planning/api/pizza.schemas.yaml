@@ -1,0 +1,117 @@
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
+      required:
+        - accountId
+        - username
+        - email
+
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          format: int64
+        accountId:
+          type: integer
+          format: int64
+        deviceId:
+          type: integer
+          format: int64
+        statusId:
+          type: integer
+          format: int64
+        totalAmount:
+          type: number
+          format: float
+        orderDate:
+          type: string
+          format: date-time
+        paymentStatus:
+          type: string
+          enum:
+            - paid
+            - unpaid
+        readyStatus:
+          type: string
+          description: Current order status
+          enum:
+            - queued
+            - cooking
+            - ready
+            - finished
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+      required:
+        - ingredients
+
+    NewOrder:
+      type: object
+      properties:
+        deviceId:
+          type: integer
+        ingredients:
+          type: array
+          description: For creation pass only ingredient id
+          items:
+            $ref: '#/components/schemas/Ingredient'
+
+    Ingredient:
+      type: object
+      properties:
+        ingredientId:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - liquid
+            - meat
+            - fish
+            - fruitOrVeggie
+            - seasoning
+        unit:
+          type: string
+          enum:
+            - piece
+            - ml
+            - mg
+        quantity:
+          type: number
+        pricePerUnit:
+          type: number
+          format: float
+        stockLevel:
+          type: integer
+        additives:
+          type: array
+          description: List of additives and allergens of this ingredient
+          items:
+            type: string
+      required:
+        - ingredientId
+    Status:
+      type: object
+      properties:
+        statusId:
+          type: integer
+          format: int64
+        description:
+          type: string

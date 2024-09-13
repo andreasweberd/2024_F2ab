@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: Pizza API
+  description: Pizza erstellen
+  version: "0.1"
+paths:
+  /pizza:
+    post:
+      summary: Creates a Pizza
+      description: Creates a Pizza
+      operationId: createPizza
+      requestBody:
+        description: Pizza creation details
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ingredients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: Salami
+                      menge:
+                        type: integer
+                        format: int64
+                        example: 5
+                  example: 
+                    - name: Salami
+                      menge: 5
+                    - name: Käse
+                      menge: 3
+      responses:
+        '200':
+          description: Pizza successfully created
+        '400':
+          description: Wrong request body
+        '500':
+          description: Pizza could not be created

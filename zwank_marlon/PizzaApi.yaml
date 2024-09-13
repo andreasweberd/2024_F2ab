@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Pizza Apis
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+  
+paths:
+  /pizza:
+    post:
+      tags:
+        - pizza  
+      summary: send Ingredients to backend
+      description: ingredients to backend
+      operationId: createPizza
+      requestBody:
+        description: create a pizza with given ingredients
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pizza'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pizza'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pizza'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pizza'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pizza'
+        '400':
+          description: Invalid ID supplied
+        
+components:
+  schemas:
+    Pizza:
+      required:
+        - name
+        - Ingredients  
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: PizzaTest
+        Ingredients:  
+          xml:
+            wrapped: true
+          type: array
+          items:  
+            $ref: '#/components/schemas/Ingredients'
+        
+    Ingredients:
+      required:  
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Salami
+      xml:
+        name: ingredient  
