@@ -26,11 +26,18 @@ paths:
               required:
                 - name
                 - toppings
+                - size
               properties:
                 name:
                   type: string
                   example: Margherita
-
+                size:
+                  type: string
+                  enum:
+                    - S
+                    - M
+                    - L
+                  example: M
                 toppings:
                   type: array
                   items:
@@ -40,10 +47,10 @@ paths:
                     - Artischocken
       responses:
         '200':
-          description: Hat geklappt, Brudi
+          description: Gut Gemacht
         '400':
-          description: Falsche Eingabe, Talahon
+          description: ÄÄÄÄÄhhhhh
         '404':
-          description: Merkel, fix Internet
+          description: Merkel, wo Internet
         '422':
-          description: Validation exception
+          description: Kauf neues Ticket

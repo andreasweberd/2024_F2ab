@@ -4,11 +4,11 @@ info:
   version: 1.0.0
 paths:
   /order:
-    post:
+    put:
       tags:
-        - order
+        - create
       summary: Add a new order
-      description: Add a new order to the store
+      description: Add a new order
       operationId: addOrder
       requestBody:
         description: Create a new order in the store
@@ -28,30 +28,20 @@ paths:
           description: Invalid input
         '422':
           description: Validation exception
-  /order/{orderId}:
-    delete:
+  /getIngredientLevel:
+    get:
       tags:
-        - order
-      summary: Deletes a order
-      description: delete a order
-      operationId: deleteOrder
-      parameters:
-        - name: api_key
-          in: header
-          description: ''
-          required: false
-          schema:
-            type: string
-        - name: orderId
-          in: path
-          description: Order id to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
+        - get
+      summary: Get Level of Ingredients
+      description: Get Level of Ingredients
+      operationId: getIngredientLevel
       responses:
-        '400':
-          description: Invalid order value
+        '200':
+          description: Level response
+          content:
+           application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredients'
 components:
   schemas:
     Order:
@@ -63,13 +53,6 @@ components:
           type: integer
           format: int64
           example: 0
-        status:
-          type: string
-          description: order status
-          enum:
-            - available
-            - pending
-            - payed
         ingredients:
           type: array
           description: ingredients to add to order
@@ -77,21 +60,28 @@ components:
              $ref: '#/components/schemas/Ingredients'
     Ingredients:
       required:
-        - type
+        - ingredientType
       type: object
       properties:
-        type:
-          type: string
-          enum:
-            - Salami
-            - Bacon
-            - Mushrooms
-            - Cheese
-            - Pineapple (just don't)
-            - Eggs
+        ingredients:
+          type: array
+          items:
+            type: array
+            items:
+              oneOf:
+                - type: string
+                  enum:
+                    - Salami
+                    - Bacon
+                    - Mushrooms
+                    - Cheese
+                    - Pineapple (just don't)
+                    - Eggs
+                - type: integer
+                  format: int64
   requestBodies:
     Order:
-      description: Order object that needs to be added to the store
+      description: Order object
       content:
         application/json:
           schema:
