@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: PizzaPoster 3.0
+  description: |
+    This is a sample Pizza Store
+  version: 0.0.11
+
+tags:
+  - name: pizza
+    description: Hier kannst du deine Pizza bestellen
+
+paths:
+  /Pizza:
+    post:
+      summary: Bestellung hier eingeben
+      description: Add a new pizza order to the store
+      operationId: addPizza
+      tags:
+        - pizza
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - toppings
+              properties:
+                name:
+                  type: string
+                  example: Margherita
+
+                toppings:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                    - Käse
+                    - Artischocken
+      responses:
+        '200':
+          description: Hat geklappt, Brudi
+        '400':
+          description: Falsche Eingabe, Talahon
+        '404':
+          description: Merkel, fix Internet
+        '422':
+          description: Validation exception
