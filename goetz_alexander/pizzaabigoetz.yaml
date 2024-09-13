@@ -41,3 +41,36 @@ paths:
           description: Wrong request body
         '500':
           description: Pizza could not be created
+
+  /ingredients:
+    get:
+      summary: Get ingredients
+      description: Retrieves the list of available ingredients
+      operationId: getIngredients
+      responses:
+        '200':
+          description: Ingredients list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ingredients:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Salami
+                        menge:
+                          type: integer
+                          format: int64
+                          example: 5
+                    example: 
+                      - name: Salami
+                        menge: 5
+                      - name: Käse
+                        menge: 3
+        '400':
+          description: Error
