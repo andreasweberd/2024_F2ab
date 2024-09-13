@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: PizzaPoster 3.0
+  description: |
+    This is a sample Pizza Store
+  version: 0.0.11
+
+tags:
+  - name: pizza
+    description: Hier kannst du deine Pizza bestellen
+
+paths:
+  /Pizza:
+    post:
+      summary: Bestellung hier eingeben
+      description: Add a new pizza order to the store
+      operationId: addPizza
+      tags:
+        - pizza
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - toppings
+                - size
+              properties:
+                name:
+                  type: string
+                  example: Margherita
+                size:
+                  type: string
+                  enum:
+                    - S
+                    - M
+                    - L
+                  example: M
+                toppings:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                    - Käse
+                    - Artischocken
+      responses:
+        '200':
+          description: Gut Gemacht
+        '400':
+          description: ÄÄÄÄÄhhhhh
+        '404':
+          description: Merkel, wo Internet
+        '422':
+          description: Kauf neues Ticket
