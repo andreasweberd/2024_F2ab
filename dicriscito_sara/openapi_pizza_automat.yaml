@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Pizza Ordering API
+  version: "1.0.0"
+  description: API for ordering pizzas through an automated device.
+servers:
+  - url: https://pizza-automat.example.com/api
+
+paths:
+  /ingredients:
+    get:
+      summary: Get available ingredients
+      responses:
+        200:
+          description: List of ingredients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+  /order:
+    post:
+      summary: Place a pizza order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ingredients:
+                  type: array
+                  items:
+                    type: string
+                size:
+                  type: string
+                  example: "large"
+                crustType:
+                  type: string
+                  example: "thin"
+                paymentMethod:
+                  type: string
+                  enum: [ "credit_card", "paypal", "cash" ]
+                  example: "credit_card"
+                paymentDetails:
+                  type: object
+                  properties:
+                    cardNumber:
+                      type: string
+                      example: "4111111111111111"
+                    expiryDate:
+                      type: string
+                      example: "12/25"
+                    cvv:
+                      type: string
+                      example: "123"
+      responses:
+        200:
+          description: Order accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderId:
+                    type: string
+                    example: "12345"
+
+  /order/{orderId}/status:
+    get:
+      summary: Get the status of a pizza order
+      parameters:
+        - name: orderId
+          in: path
+          required: true # Path parameters must be required
+          schema:
+            type: string # Use schema for path parameter
+      responses:
+        200:
+          description: Order status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "preparing"
+
+  /device/location:
+    get:
+      summary: Get the location of the pizza-making device
+      responses:
+        200:
+          description: Location of the device
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  latitude:
+                    type: number
+                    example: 37.7749
+                  longitude:
+                    type: number
+                    example: -122.4194
+                  address:
+                    type: string
+                    example: "123 Pizza Street, San Francisco, CA"

@@ -1,25 +1,5 @@
 components:
   schemas:
-    Account:
-      type: object
-      properties:
-        accountId:
-          type: integer
-          format: int64
-        username:
-          type: string
-        email:
-          type: string
-        phoneNumber:
-          type: string
-        dateCreated:
-          type: string
-          format: date-time
-      required:
-        - accountId
-        - username
-        - email
-
     Order:
       type: object
       properties:
@@ -115,3 +95,14 @@ components:
           format: int64
         description:
           type: string
+    SystemHealthInfo:
+      type: object
+      properties:
+        uptime:
+          type: integer
+          format: int64
+        ordersServed:
+          type: integer
+          format: int64
+        moneyMade:
+          type: number
