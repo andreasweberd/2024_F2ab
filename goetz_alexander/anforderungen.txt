@@ -11,3 +11,12 @@ Hardware wird über Rest angesprochen
 Auf jedem Automaten ein Webserver
 Gastbestellung oder Login
 nicht verfügbare Pizzen sollen nicht auswählbar sein
+
+Ressourcen:
+Zutaten
+account
+device
+status
+orders
+
+
