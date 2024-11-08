@@ -1,0 +1,7 @@
+Mockup erstellen
+wasserfallmodel oder so nutzen
+Dokumentation
+fake kostenplanung (Arbeitsstunden, Stromkosten, etc)
+Programmiersprache frei wählbar
+Datenbank frei wählbar
+GUI frei gestaltbar
