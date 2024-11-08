@@ -19,7 +19,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            width: 280px; /* Reduce width for better layout */
+            width: 280px;
             box-sizing: border-box;
         }
         .form-container label {
@@ -29,7 +29,7 @@
         }
         .form-container input,
         .form-container select {
-            width: 100%; /* Full width inside container */
+            width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -40,15 +40,25 @@
         .form-container button {
             width: 100%;
             padding: 10px;
-            background-color: #333;
-            color: #fff;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
-        .form-container button:hover {
+        .form-container .submit-button {
+            background-color: #333;
+            color: #fff;
+            margin-bottom: 10px; /* Add space between buttons */
+        }
+        .form-container .submit-button:hover {
             background-color: #555;
+        }
+        .form-container .skip-button {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .form-container .skip-button:hover {
+            background-color: #ccc;
         }
     </style>
 </head>
@@ -71,7 +81,9 @@
                 <option value="location2">Location 2</option>
                 <option value="location3">Location 3</option>
             </select>
-            <button type="submit">Submit</button>
+
+            <button type="submit" class="submit-button">Submit</button>
+            <button type="button" class="skip-button" onclick="window.location.href='/main_page'">Skip</button>
         </form>
     </div>
 </body>
