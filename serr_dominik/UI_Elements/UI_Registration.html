@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             margin: 0;
             background-color: #f9f9f9;
         }
+
         .form-container {
             background-color: #fff;
             padding: 20px;
@@ -22,11 +24,13 @@
             width: 280px;
             box-sizing: border-box;
         }
+
         .form-container label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
         }
+
         .form-container input,
         .form-container select {
             width: 100%;
@@ -37,6 +41,7 @@
             font-size: 14px;
             box-sizing: border-box;
         }
+
         .form-container button {
             width: 100%;
             padding: 10px;
@@ -45,23 +50,29 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .form-container .submit-button {
             background-color: #333;
             color: #fff;
-            margin-bottom: 10px; /* Add space between buttons */
+            margin-bottom: 10px;
+            /* Add space between buttons */
         }
+
         .form-container .submit-button:hover {
             background-color: #555;
         }
+
         .form-container .skip-button {
             background-color: #e0e0e0;
             color: #333;
         }
+
         .form-container .skip-button:hover {
             background-color: #ccc;
         }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <form action="/submit_registration" method="POST">
@@ -75,16 +86,27 @@
             <input type="email" id="email" name="email" required>
 
             <label for="location">Location</label>
-            <select id="location" name="location">
-                <option value="" disabled selected>Select your location</option>
-                <option value="location1">Location 1</option>
-                <option value="location2">Location 2</option>
-                <option value="location3">Location 3</option>
-            </select>
-
+            <div class="locationSelect">
+                <input list="locationList"placeholder="Search location" id="searchLocation">
+                <datalist id="locationList">
+                    <!-- Fetch via API  or other -->
+                </datalist>
+            </div>
+            <script>
+                // Examples. Later the data should be fetched in a seperate javascript file
+                document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("locationList").innerHTML += '<option value="location">location</option>'
+                document.getElementById("locationList").innerHTML += '<option value="location1">location1</option>'
+                document.getElementById("locationList").innerHTML += '<option value="location2">location2</option>'
+                });
+                function closeForm() {
+                    document.querySelector(".form-container").style.display = "none";
+                }
+                </script>
             <button type="submit" class="submit-button">Submit</button>
-            <button type="button" class="skip-button" onclick="window.location.href='/main_page'">Skip</button>
+            <button type="button" class="skip-button" onclick="closeForm()">Skip</button>
         </form>
     </div>
 </body>
+
 </html>
