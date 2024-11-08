@@ -1,0 +1,10 @@
+Notes für die Dokumentation:
+
+- Überlegen der Konzeptidee
+- Erstellen eines Mockups
+- Entscheidung Android Studio zu nutzen, da gut dokumentiert und unterstützt Nutzer viel
+- Einrichten von Android Studio
+- Grundlagen von Android Studio als Umgebung lernen
+- Erstellen der Navigationsleiste
+- Erstellen des Rechners
+	- Layoutänderung, da Buttons zu klein wenn zwo Zeilen nebeneinander

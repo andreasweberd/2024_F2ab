@@ -1,0 +1,76 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+}
+
+.qrwrapper{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.box{
+    margin: 30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+    width: 450px;
+    height: 600px;
+}
+
+.boxwrapper{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.qrcode{
+    height: 600px;
+    width: 600px;
+}
+
+.reihe{
+    display: flex;
+    flex-direction: row;
+}
+
+.lf{
+    margin-left: 20px;
+}
+.tm40{
+    margin-top: 40px;
+}
+.tm10{
+    margin-top: 10px;
+}
+.tm20{
+    margin-top: 20px;
+}
+
+.bestellreihe{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.bestellbox{
+    width: 250px;
+}
