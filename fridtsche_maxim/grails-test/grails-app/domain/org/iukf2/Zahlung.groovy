@@ -1,4 +1,4 @@
-package bank
+package org.iukf2
 
 class Zahlung {
     BigDecimal betrag

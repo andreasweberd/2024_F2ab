@@ -1,14 +1,10 @@
-package grails.test
-import grails.test.Inhaber
-import grails.test.Kreditkarte
-import grails.test.Kreditkartenkonto
-import grails.test.Kunde
-import grails.test.Zahlung
+package org.iukf2
+
 
 class BankController {
 
     def index() {
-
+        createData()
     }
 
     def createData() {
@@ -18,6 +14,6 @@ class BankController {
         def kreditkarte = new Kreditkarte(nummer: "1234567890", inhaber: inhaber, kreditkartenkonto: konto).save(flush: true)
         new Zahlung(betrag: 100.00, datum: new Date(), kreditkarte: kreditkarte).save(flush: true)
 
-        render "fucj!"
+        render "fuck!"
     }
 }

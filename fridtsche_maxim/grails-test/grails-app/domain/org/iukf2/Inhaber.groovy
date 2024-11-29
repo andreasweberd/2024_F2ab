@@ -1,6 +1,6 @@
-package grails.test
+package org.iukf2
 
-public class Inhaber {
+class Inhaber {
     String name
     static hasMany = [kreditkarten: Kreditkarte]
 
