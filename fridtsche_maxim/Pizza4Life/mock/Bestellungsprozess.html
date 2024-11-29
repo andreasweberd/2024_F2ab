@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Welt</title>
+    <style>
+        /* General styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 1.1em;
+            color: #999;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .header span.active {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .header span.inactive {
+            color: #bbb;
+        }
+
+        .header span svg {
+            fill: currentColor;
+            width: 18px;
+            height: 18px;
+        }
+
+        .section {
+            display: none;
+            text-align: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section.active {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .selector {
+            flex-direction: column;
+            display: flex;
+            border: 1px solid #dadada;
+            border-radius: 8px;
+        }
+
+        .selector p {
+            align-self: flex-start;
+            padding: 10px 6px;
+        }
+
+        .size-options,
+        .ingredients {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+
+        .size-option {
+            font-weight: bold;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #fff;
+            width: 100px;
+            text-align: center;
+            font-size: 0.9em;
+            transition: border-color 0.3s;
+        }
+
+        .size-option.selected {
+            border-color: #4CAF50;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .size-option p {
+            font-weight: initial;
+            color: #dadada;
+        }
+
+        .add-ingredient {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4CAF50;
+            color: #fff;
+            font-size: 1.5em;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .template-btn {
+            background: #FFC107;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            border: none;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            width: 100px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .ingredient-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <span id="step1" class="step active">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26 6.91.99-5 4.87L17.18 22 12 18.27 6.82 22l1.18-6.88-5-4.87 6.91-.99L12 2z"/></svg>
+            Startseite
+        </span>
+        <span id="step2" class="step inactive">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26 6.91.99-5 4.87L17.18 22 12 18.27 6.82 22l1.18-6.88-5-4.87 6.91-.99L12 2z"/></svg>
+            Bestellen
+        </span>
+        <span id="step3" class="step inactive">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26 6.91.99-5 4.87L17.18 22 12 18.27 6.82 22l1.18-6.88-5-4.87 6.91-.99L12 2z"/></svg>
+            Bezahlen
+        </span>
+        <span id="step4" class="step inactive">
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10,50 Q10,25 35,15 L80,50 L35,85 Q10,75 10,50 Z"
+        fill="#4CAF50" stroke="black" stroke-width="3" />
+</svg>
+            Abholen
+        </span>
+    </div>
+
+    <div id="section1" class="section ">
+        <h2>Willkommen bei Pizza Welt</h2>
+        <p>Ihre Pizza, Ihr Geschmack, Ihr Weg!</p>
+        <button class="btn" onclick="nextStep()">Bestellen</button>
+    </div>
+
+    <div id="section2" class="section active">
+        <div style="display: flex;">
+            <img src="">
+            <div class="width: 100%;">
+        <h2>Bestellen</h2>
+        <div class="selector">
+            <p style="font-weight: bold; font-size: 1.1em;">Größe:</p>
+            <div class="size-options">
+                <div class="size-option" onclick="selectSize(this)">Klein
+                    <p>
+                        ~ 10 cm
+                    </p>
+                </div>
+                <div class="size-option" onclick="selectSize(this)">Angemessen <p>
+                    ~ 17 cm
+                </p> </div>
+                <div class="size-option" onclick="selectSize(this)">Groß <p>
+                    ~ 30 cm
+                </p> </div>
+            </div>
+        </div>
+        <div class="selector">
+            <p style="font-weight: bold; font-size: 1.1em;">Zutaten:</p>
+            <div class="ingredients">
+                <div class="add-ingredient">+</div>
+                <div class="ingredient-item">
+                    <img src="https://via.placeholder.com/30" alt="Tomaten">4x Tomaten
+                </div>
+                <div class="ingredient-item">
+                    <img src="https://via.placeholder.com/30" alt="Bananen">1x Bananen
+                </div>
+            </div>
+        </div>
+
+
+        <div style="display: flex;    justify-content: space-around;">
+        <button class="template-btn">Vorlage <br> auswählen</button>
+        <button class="btn" onclick="nextStep()">Weiter ➔</button>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section3" class="section">
+        <h2>Bezahlen</h2>
+        <p>Wählen Sie Ihre Zahlungsmethode:</p>
+        <button class="btn" onclick="nextStep()">Zur Abholung ➔</button>
+    </div>
+
+    <div id="section4" class="section">
+        <h2>Abholen</h2>
+        <p>Ihre Bestellung ist zur Abholung bereit!</p>
+        <button class="btn" onclick="restart()">Neue Bestellung</button>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+
+    function nextStep() {
+        if (currentStep < 4) {
+            document.getElementById(`section${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.add('inactive');
+            currentStep++;
+            document.getElementById(`section${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.remove('inactive');
+        }
+    }
+
+    function restart() {
+        document.getElementById(`section${currentStep}`).classList.remove('active');
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        document.getElementById(`step${currentStep}`).classList.add('inactive');
+        currentStep = 1;
+        document.getElementById(`section${currentStep}`).classList.add('active');
+        document.getElementById(`step${currentStep}`).classList.add('active');
+        document.getElementById(`step${currentStep}`).classList.remove('inactive');
+    }
+
+    function selectSize(element) {
+        document.querySelectorAll('.size-option').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+    }
+</script>
+
+</body>
+</html>
