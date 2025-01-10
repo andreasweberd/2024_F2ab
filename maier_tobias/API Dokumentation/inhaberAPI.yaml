@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: Inhaber API
+  version: 1.0.0
+paths:
+  /inhaber:
+    get:
+      summary: "Get a list of Inhaber"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inhaber'
+    post:
+      summary: "Create a new Inhaber"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: "Inhaber erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /inhaber/{id}:
+    get:
+      summary: "Get a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '404':
+          description: "Inhaber nicht gefunden"
+    put:
+      summary: "Update a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '200':
+          description: "Inhaber erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Inhaber nicht gefunden"
+    delete:
+      summary: "Delete a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Inhaber erfolgreich gelöscht"
+        '404':
+          description: "Inhaber nicht gefunden"
+components:
+  schemas:
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
