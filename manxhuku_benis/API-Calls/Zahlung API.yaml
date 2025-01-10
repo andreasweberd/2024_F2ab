@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Zahlung API
+  description: API documentation for managing Zahlung resources.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /zahlung:
+    get:
+      summary: List all Zahlung entries
+      description: Retrieve a paginated list of all Zahlung entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Zahlung entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Zahlung'
+                  zahlungCount:
+                    type: integer
+  /zahlung/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Zahlung.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Zahlung
+      description: Retrieve details of a specific Zahlung by ID.
+      responses:
+        '200':
+          description: Details of the requested Zahlung.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '404':
+          description: Zahlung not found.
+    put:
+      summary: Update an existing Zahlung
+      description: Update the details of an existing Zahlung by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '200':
+          description: Zahlung updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Zahlung not found.
+    delete:
+      summary: Delete a Zahlung
+      description: Delete an existing Zahlung by ID.
+      responses:
+        '204':
+          description: Zahlung deleted successfully.
+        '404':
+          description: Zahlung not found.
+  /zahlung/new:
+    post:
+      summary: Create a new Zahlung
+      description: Save a new Zahlung.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '201':
+          description: Zahlung created successfully.
+        '400':
+          description: Validation error.
+
+components:
+  schemas:
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+        amount:
+          type: number
+          format: float
+        date:
+          type: string
+          format: date
+        description:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: Kreditkartenkonto API
+  description: API documentation for managing Kreditkartenkonto resources.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /kreditkartenkonto:
+    get:
+      summary: List all Kreditkartenkonto entries
+      description: Retrieve a paginated list of all Kreditkartenkonto entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Kreditkartenkonto entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkartenkonto'
+                  kreditkartenkontoCount:
+                    type: integer
+  /kreditkartenkonto/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Kreditkartenkonto.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Kreditkartenkonto
+      description: Retrieve details of a specific Kreditkartenkonto by ID.
+      responses:
+        '200':
+          description: Details of the requested Kreditkartenkonto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '404':
+          description: Kreditkartenkonto not found.
+    put:
+      summary: Update an existing Kreditkartenkonto
+      description: Update the details of an existing Kreditkartenkonto by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '200':
+          description: Kreditkartenkonto updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Kreditkartenkonto not found.
+    delete:
+      summary: Delete a Kreditkartenkonto
+      description: Delete an existing Kreditkartenkonto by ID.
+      responses:
+        '204':
+          description: Kreditkartenkonto deleted successfully.
+        '404':
+          description: Kreditkartenkonto not found.
+  /kreditkartenkonto/new:
+    post:
+      summary: Create a new Kreditkartenkonto
+      description: Save a new Kreditkartenkonto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '201':
+          description: Kreditkartenkonto created successfully.
+        '400':
+          description: Validation error.
+
+components:
+  schemas:
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+        cardNumber:
+          type: string
+        expirationDate:
+          type: string
+        cardHolder:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

@@ -1,0 +1,6 @@
+#Fri, 29 Nov 2024 10:00:38 +0100
+
+info.app.version=0.1
+info.app.name=Pizzagrails
+grails.env=production
+info.app.grailsVersion=6.2.1
