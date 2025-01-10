@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Kreditkarte API
+  version: 1.0.0
+paths:
+  /kreditkarte:
+    get:
+      summary: "Get a list of Kreditkarten"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kreditkarte'
+    post:
+      summary: "Create a new Kreditkarte"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '201':
+          description: "Kreditkarte erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /kreditkarte/{id}:
+    get:
+      summary: "Get a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '404':
+          description: "Kreditkarte nicht gefunden"
+    put:
+      summary: "Update a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '200':
+          description: "Kreditkarte erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Kreditkarte nicht gefunden"
+    delete:
+      summary: "Delete a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Kreditkarte erfolgreich gelöscht"
+        '404':
+          description: "Kreditkarte nicht gefunden"
+components:
+  schemas:
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        cardNumber:
+          type: string
+        expirationDate:
+          type: string
+          format: date
