@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Pizza API oder etwas
+  title: Pizzaautomat API WIP
   version: 1.0.0
   description: API Dokumentation für die Verwaltung von Kunden, Kreditkarten und zugehörigen Konten sowie Zahlungen und Inhaber(?).
 servers:
