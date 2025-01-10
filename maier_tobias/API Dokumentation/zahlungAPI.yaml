@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Zahlung API
+  version: 1.0.0
+paths:
+  /zahlung:
+    get:
+      summary: "Get a list of Zahlungen"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zahlung'
+    post:
+      summary: "Create a new Zahlung"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '201':
+          description: "Zahlung erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /zahlung/{id}:
+    get:
+      summary: "Get a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '404':
+          description: "Zahlung nicht gefunden"
+    put:
+      summary: "Update a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '200':
+          description: "Zahlung erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Zahlung nicht gefunden"
+    delete:
+      summary: "Delete a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Zahlung erfolgreich gelöscht"
+        '404':
+          description: "Zahlung nicht gefunden"
+components:
+  schemas:
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+        betrag:
+          type: number
+          format: float
+        datum:
+          type: string
+          format: date
+        beschreibung:
+          type: string
