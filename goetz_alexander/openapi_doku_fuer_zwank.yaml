@@ -4,8 +4,8 @@ info:
   description: Eine API zur Verwaltung von Kunden, Kreditkarten, Inhabern, Kreditkartenkonten und Zahlungen eines Pizzaautomaten
   version: 1.0.0
 servers:
-  - url: https://api.example.com/v1
-    description: Hauptserver
+  - url: http://localhost:8080
+    description: localhost
 
 tags:
   - name: Kunde
@@ -20,7 +20,7 @@ tags:
     description: Verwaltung von Zahlungen
 
 paths:
-  /kunden:
+  /kunde:
     get:
       tags:
         - Kunde
@@ -68,7 +68,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /kunden/{id}:
+  /kunde/{id}:
     get:
       tags:
         - Kunde
@@ -159,7 +159,7 @@ paths:
         '500':
           description: Serverfehler.
 
-  /kreditkarten:
+  /kreditkarte:
     get:
       tags:
         - Kreditkarte
@@ -197,7 +197,7 @@ paths:
         '400':
           description: Ungültige Eingabedaten
 
-  /kreditkarten/{id}:
+  /kreditkarte/{id}:
     get:
       tags:
         - Kreditkarte
@@ -369,7 +369,7 @@ paths:
         '204':
           description: Inhaber erfolgreich gelöscht.
 
-  /kreditkartenkonten:
+  /kreditkartenkonte:
     get:
       tags:
         - Kreditkartenkonto
@@ -407,7 +407,7 @@ paths:
         '400':
           description: Ungültige Eingabedaten
 
-  /kreditkartenkonten/{id}:
+  /kreditkartenkonto/{id}:
     get:
       tags:
         - Kreditkartenkonto
@@ -474,7 +474,7 @@ paths:
         '204':
           description: Kreditkartenkonto erfolgreich gelöscht.
 
-  /zahlungen:
+  /zahlung:
     get:
       tags:
         - Zahlung
@@ -512,7 +512,7 @@ paths:
         '400':
           description: Ungültige Eingabedaten
 
-  /zahlungen/{id}:
+  /zahlung/{id}:
     get:
       tags:
         - Zahlung
