@@ -4,16 +4,16 @@ info:
   version: 1.0.0
   description: API zur Verwaltung von Inhaber-Ressourcen
 tags:
-  - name: inhaber
-  - name: kunde
-  - name: kreditkarte
-  - name: zahlung
-  - name: kreditkartenkonto
+  - name: Inhaber
+  - name: Kunde
+  - name: Kreditkarte
+  - name: Zahlung
+  - name: Kreditkartenkonto
 paths:
   /inhaber:
     get:
       tags:
-        - inhaber
+        - Inhaber
       summary: Liste aller Inhaber abrufen
       parameters:
         - name: max
@@ -34,7 +34,7 @@ paths:
                   $ref: '#/components/schemas/Inhaber'
     post:
       tags:
-        - inhaber
+        - Inhaber
       summary: Einen neuen Inhaber erstellen
       requestBody:
         required: true
@@ -54,7 +54,7 @@ paths:
   /inhaber/{id}:
     get:
       tags:
-        - inhaber
+        - Inhaber
       summary: Einen bestimmten Inhaber abrufen
       parameters:
         - name: id
@@ -73,7 +73,7 @@ paths:
           description: Inhaber nicht gefunden
     put:
       tags:
-        - inhaber
+        - Inhaber
       summary: Einen vorhandenen Inhaber aktualisieren
       parameters:
         - name: id
@@ -100,7 +100,7 @@ paths:
           description: Inhaber nicht gefunden
     delete:
       tags:
-        - inhaber
+        - Inhaber
       summary: Einen bestimmten Inhaber löschen
       parameters:
         - name: id
@@ -116,7 +116,7 @@ paths:
   /kunde:
     get:
       tags:
-        - kunde
+        - Kunde
       summary: Liste aller Kunden abrufen
       parameters:
         - name: max
@@ -137,7 +137,7 @@ paths:
                   $ref: '#/components/schemas/Kunde'
     post:
       tags:
-        - kunde
+        - Kunde
       summary: Einen neuen Kunden erstellen
       requestBody:
         required: true
@@ -157,7 +157,7 @@ paths:
   /kunde/{id}:
     get:
       tags:
-        - kunde
+        - Kunde
       summary: Einen bestimmten Kunden abrufen
       parameters:
         - name: id
@@ -176,7 +176,7 @@ paths:
           description: Kunde nicht gefunden
     put:
       tags:
-        - kunde
+        - Kunde
       summary: Einen vorhandenen Kunden aktualisieren
       parameters:
         - name: id
@@ -203,7 +203,7 @@ paths:
           description: Kunde nicht gefunden
     delete:
       tags:
-        - kunde
+        - Kunde
       summary: Einen bestimmten Kunden löschen
       parameters:
         - name: id
@@ -219,7 +219,7 @@ paths:
   /kreditkarte:
     get:
       tags:
-        - kreditkarte
+        - Kreditkarte
       summary: Liste aller Kreditkarten abrufen
       parameters:
         - name: max
@@ -240,7 +240,7 @@ paths:
                   $ref: '#/components/schemas/Kreditkarte'
     post:
       tags:
-        - kreditkarte
+        - Kreditkarte
       summary: Eine neue Kreditkarte erstellen
       requestBody:
         required: true
@@ -260,7 +260,7 @@ paths:
   /kreditkarte/{id}:
     get:
       tags:
-        - kreditkarte
+        - Kreditkarte
       summary: Eine bestimmte Kreditkarte abrufen
       parameters:
         - name: id
@@ -279,7 +279,7 @@ paths:
           description: Kreditkarte nicht gefunden
     put:
       tags:
-        - kreditkarte
+        - Kreditkarte
       summary: Eine vorhandene Kreditkarte aktualisieren
       parameters:
         - name: id
@@ -306,7 +306,7 @@ paths:
           description: Kreditkarte nicht gefunden
     delete:
       tags:
-        - kreditkarte
+        - Kreditkarte
       summary: Eine bestimmte Kreditkarte löschen
       parameters:
         - name: id
@@ -322,7 +322,7 @@ paths:
   /zahlungen:
     get:
       tags:
-        - zahlung
+        - Zahlung
       summary: Liste aller Zahlungen
       description: Gibt eine Liste aller Zahlungen zurück, paginiert.
       parameters:
@@ -345,7 +345,7 @@ paths:
   
     post:
       tags:
-        - zahlung
+        - Zahlung
       summary: Erstelle eine neue Zahlung
       description: Erstellt eine neue Zahlung (Zahlung) und gibt sie zurück.
       requestBody:
@@ -367,7 +367,7 @@ paths:
   /zahlungen/{id}:
     get:
       tags:
-        - zahlung
+        - Zahlung
       summary: Hole eine spezifische Zahlung
       description: Ruft eine spezifische Zahlung anhand ihrer ID ab.
       parameters:
@@ -389,7 +389,7 @@ paths:
 
     put:
       tags:
-        - zahlung
+        - Zahlung
       summary: Aktualisiere eine bestehende Zahlung
       description: Aktualisiert eine bestehende Zahlung anhand ihrer ID.
       parameters:
@@ -419,7 +419,7 @@ paths:
 
     delete:
       tags:
-        - zahlung
+        - Zahlung
       summary: Lösche eine Zahlung
       description: Löscht die Zahlung anhand ihrer ID.
       parameters:
@@ -437,7 +437,7 @@ paths:
   /kreditkartenkonten:
     get:
       tags:
-        - kreditkartenkonto
+        - Kreditkartenkonto
       summary: Liste aller Kreditkartenkonten
       description: Gibt eine Liste aller Kreditkartenkonten zurück, paginiert.
       parameters:
@@ -460,7 +460,7 @@ paths:
   
     post:
       tags:
-        - kreditkartenkonto
+        - Kreditkartenkonto
       summary: Erstelle ein neues Kreditkartenkonto
       description: Erstellt ein neues Kreditkartenkonto und gibt es zurück.
       requestBody:
@@ -482,7 +482,7 @@ paths:
   /kreditkartenkonten/{id}:
     get:
       tags:
-        - kreditkartenkonto
+        - Kreditkartenkonto
       summary: Hole ein spezifisches Kreditkartenkonto
       description: Ruft ein spezifisches Kreditkartenkonto anhand seiner ID ab.
       parameters:
@@ -504,7 +504,7 @@ paths:
 
     put:
       tags:
-        - kreditkartenkonto
+        - Kreditkartenkonto
       summary: Aktualisiere ein bestehendes Kreditkartenkonto
       description: Aktualisiert ein bestehendes Kreditkartenkonto anhand seiner ID.
       parameters:
@@ -534,7 +534,7 @@ paths:
 
     delete:
       tags:
-        - kreditkartenkonto
+        - Kreditkartenkonto
       summary: Lösche ein Kreditkartenkonto
       description: Löscht das Kreditkartenkonto anhand seiner ID.
       parameters:
@@ -563,10 +563,6 @@ components:
         email:
           type: string
           example: max.mustermann@example.com
-        created_at:
-          type: string
-          format: date-time
-          example: 2023-01-01T12:00:00Z
     Kunde:
       type: object
       properties:
@@ -575,14 +571,10 @@ components:
           example: 1
         name:
           type: string
-          example: Erika Mustermann
+          example: Erika Musterfrau
         email:
           type: string
-          example: erika.mustermann@example.com
-        created_at:
-          type: string
-          format: date-time
-          example: 2023-01-01T12:00:00Z
+          example: erika.musterfrau@example.com
     Kreditkarte:
       type: object
       properties:
@@ -592,17 +584,13 @@ components:
         kartennummer:
           type: string
           example: "1234-5678-9876-5432"
-        inhaber:
+        Inhaber:
           type: string
           example: Max Mustermann
         gueltig_bis:
           type: string
           format: date
           example: 2025-12-31
-        created_at:
-          type: string
-          format: date-time
-          example: 2023-01-01T12:00:00Z
     Zahlung:
       type: object
       properties:
@@ -632,25 +620,11 @@ components:
         kontonummer:
           type: string
           description: Die Kontonummer des Kreditkartenkontos.
-        kreditlimit:
-          type: number
-          format: float
-          description: Das Kreditlimit des Kontos.
-        aktuellerBetrag:
-          type: number
-          format: float
-          description: Der aktuelle Betrag auf dem Konto.
-        ablaufdatum:
+        kontoInhaber:
           type: string
-          format: date
-          description: Das Ablaufdatum der Kreditkarte.
-        kontoinhaber:
-          type: string
-          description: Der Name des Kontoinhabers.
+          description: Der Name des KontoInhabers.
       required:
         - kontonummer
-        - kreditlimit
-        - aktuellerBetrag
-        - ablaufdatum
+        - kontoInhaber
 
 
