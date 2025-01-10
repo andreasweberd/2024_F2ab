@@ -1,0 +1,489 @@
+openapi: 3.0.0
+info:
+  title: Pizzaautomat API
+  version: 1.0.0
+  
+tags:
+  - name: Inhaber
+  - name: Kreditkarte
+  - name: Kreditkartenkonto
+  - name: Kunde
+  - name: Zahlung
+paths:
+  #Inhaber
+  /inhaber:
+    get:
+      tags:
+        - Inhaber
+      summary: "Get a list of Inhaber"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inhaber'
+    post:
+      tags:
+        - Inhaber
+      summary: "Create a new Inhaber"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: "Inhaber erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /inhaber/{id}:
+    get:
+      tags:
+        - Inhaber
+      summary: "Get a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '404':
+          description: "Inhaber nicht gefunden"
+    put:
+      tags:
+        - Inhaber
+      summary: "Update a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '200':
+          description: "Inhaber erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Inhaber nicht gefunden"
+    delete:
+      tags:
+        - Inhaber
+      summary: "Delete a specific Inhaber"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Inhaber erfolgreich gelöscht"
+        '404':
+          description: "Inhaber nicht gefunden"
+
+  #Kreditkarte
+  /kreditkarte:
+    get:
+      tags:
+        - Kreditkarte
+      summary: "Get a list of Kreditkarten"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kreditkarte'
+    post:
+      tags:
+        - Kreditkarte
+      summary: "Create a new Kreditkarte"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '201':
+          description: "Kreditkarte erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /kreditkarte/{id}:
+    get:
+      tags:
+        - Kreditkarte
+      summary: "Get a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '404':
+          description: "Kreditkarte nicht gefunden"
+    put:
+      tags:
+        - Kreditkarte
+      summary: "Update a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '200':
+          description: "Kreditkarte erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Kreditkarte nicht gefunden"
+    delete:
+      tags:
+        - Kreditkarte
+      summary: "Delete a specific Kreditkarte"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Kreditkarte erfolgreich gelöscht"
+        '404':
+          description: "Kreditkarte nicht gefunden"
+
+  #Kreditkartenkonto
+  /kreditkartenkonto:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: "Get a list of Kreditkartenkonten"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kreditkartenkonto'
+    post:
+      tags:
+        - Kreditkartenkonto
+      summary: "Create a new Kreditkartenkonto"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '201':
+          description: "Kreditkartenkonto erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /kreditkartenkonto/{id}:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: "Get a specific Kreditkartenkonto"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '404':
+          description: "Kreditkartenkonto nicht gefunden"
+    put:
+      tags:
+        - Kreditkartenkonto
+      summary: "Update a specific Kreditkartenkonto"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '200':
+          description: "Kreditkartenkonto erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Kreditkartenkonto nicht gefunden"
+    delete:
+      tags:
+        - Kreditkartenkonto
+      summary: "Delete a specific Kreditkartenkonto"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Kreditkartenkonto erfolgreich gelöscht"
+        '404':
+          description: "Kreditkartenkonto nicht gefunden"
+
+  #Kunde
+  /kunde:
+    get:
+      tags:
+        - Kunde
+      summary: "Get a list of Kunden"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kunde'
+    post:
+      tags:
+        - Kunde
+      summary: "Create a new Kunde"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '201':
+          description: "Kunde erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+
+  # Zahlung
+  
+  /zahlung:
+    get:
+      tags:
+        - Zahlung
+      summary: "Get a list of Zahlungen"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zahlung'
+    post:
+      tags:
+        - Zahlung
+      summary: "Create a new Zahlung"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '201':
+          description: "Zahlung erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /zahlung/{id}:
+    get:
+      tags:
+        - Zahlung
+      summary: "Get a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '404':
+          description: "Zahlung nicht gefunden"
+    put:
+      tags:
+        - Zahlung
+      summary: "Update a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '200':
+          description: "Zahlung erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Zahlung nicht gefunden"
+    delete:
+      tags:
+        - Zahlung
+      summary: "Delete a specific Zahlung"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Zahlung erfolgreich gelöscht"
+        '404':
+          description: "Zahlung nicht gefunden"
+
+components:
+  schemas:
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+        nummer:
+          type: string
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+        saldo:
+          type: number
+          format: float
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+        vorname:
+          type: string
+        nachname:
+          type: string
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+        betrag:
+          type: number
+          format: float
+        datum:
+          type: string
+          format: date

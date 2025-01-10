@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: Kunde API
+  version: 1.0.0
+paths:
+  /kunde:
+    get:
+      summary: "Get a list of Kunden"
+      parameters:
+        - name: max
+          in: query
+          description: "Maximale Anzahl der Ergebnisse"
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Kunde'
+    post:
+      summary: "Create a new Kunde"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '201':
+          description: "Kunde erfolgreich erstellt"
+        '400':
+          description: "Validation Error"
+  /kunde/{id}:
+    get:
+      summary: "Get a specific Kunde"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '404':
+          description: "Kunde nicht gefunden"
+    put:
+      summary: "Update a specific Kunde"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '200':
+          description: "Kunde erfolgreich aktualisiert"
+        '400':
+          description: "Validation Error"
+        '404':
+          description: "Kunde nicht gefunden"
+    delete:
+      summary: "Delete a specific Kunde"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Kunde erfolgreich gelöscht"
+        '404':
+          description: "Kunde nicht gefunden"
+components:
+  schemas:
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        telefonnummer:
+          type: string
