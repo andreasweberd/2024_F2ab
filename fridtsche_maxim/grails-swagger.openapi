@@ -1,0 +1,626 @@
+openapi: 3.0.0
+info:
+  title: Pizza API oder etwas
+  version: 1.0.0
+  description: API Dokumentation für die Verwaltung von Kunden, Kreditkarten und zugehörigen Konten sowie Zahlungen und Inhaber(?).
+servers:
+  - url: /
+
+tags:
+  - name: Kreditkartenkonto
+    description: CRUD Endpunkte zur Verwaltung von Kreditkartenkonten
+  - name: Inhaber
+    description: CRUD Endpunkte zur Verwaltung von Inhabern
+  - name: Kreditkarte
+    description: CRUD Endpunkte zur Verwaltung von Kreditkarten
+  - name: Kunde
+    description: CRUD Endpunkte zur Verwaltung von Kunden
+  - name: Zahlung
+    description: CRUD Endpunkte zur Verwaltung von Zahlungen
+
+
+paths:
+  /kreditkartenkonto:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: "Liste aller Kreditkartenkonten abrufen"
+      parameters:
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+            description: geht nicht
+      responses:
+        "200":
+          description: Liste der Kreditkartenkonten
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/AlleKreditkartenkonten"
+    post:
+      tags:
+        - Kreditkartenkonto
+      summary: "Ein neues Kreditkartenkonto erstellen"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        "201":
+          description: Konto erfolgreich erstellt
+        "404":
+          description: default.not.found.message
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+
+  /kreditkartenkonto/{id}:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: "Ein Kreditkartenkonto anzeigen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Kreditkartenkonoto Objekt
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        "404":
+          description: Nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+
+    put:
+      tags:
+        - Kreditkartenkonto
+      summary: "Ein Kreditkartenkonto aktualisieren"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        "200":
+          description: Erfolgreich aktualisiert
+        "404":
+          description: Nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    delete:
+      tags:
+        - Kreditkartenkonto
+      summary: "Ein Kreditkartenkonto löschen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Erfolgreich gelöscht
+        "404":
+          description: Nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+
+  /inhaber:
+    get:
+      tags:
+        - Inhaber
+      summary: "Liste aller Inhaber abrufen"
+      parameters:
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Liste der Inhaber
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/AlleInhaber"
+    post:
+      tags:
+        - Inhaber
+      summary: "Einen neuen Inhaber erstellen"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        "201":
+          description: Inhaber erfolgreich erstellt
+
+
+
+
+  /inhaber/{id}:
+    get:
+      tags:
+        - Inhaber
+      summary: "Einen Inhaber anzeigen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ihnaber Objekt
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/Inhaber"
+        "404":
+          description: Nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    put:
+      tags:
+        - Inhaber
+      summary: "Einen Inhaber aktualisieren"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        "200":
+          description: Erfolgreich aktualisiert
+    delete:
+      tags:
+        - Inhaber
+      summary: "Einen Inhaber löschen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Erfolgreich gelöscht
+
+
+
+  /kreditkarte:
+    get:
+      tags:
+        - Kreditkarte
+      summary: "Liste aller Kreditkarten abrufen"
+      parameters:
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        "200":
+          description: Liste der Kreditkarten
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/AlleKreditkarten"
+    post:
+      tags:
+        - Kreditkarte
+      summary: "Eine neue Kreditkarte erstellen"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        "201":
+          description: Kreditkarte erfolgreich erstellt
+
+  /kreditkarte/{id}:
+    get:
+      tags:
+        - Kreditkarte
+      summary: "Eine Kreditkarte anzeigen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Kreditkarte Objekt
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        "404":
+          description: Nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    put:
+      tags:
+        - Kreditkarte
+      summary: "Eine Kreditkarte aktualisieren"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        "200":
+          description: Erfolgreich aktualisiert
+        "404":
+          description: Nicht gefunden?
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    delete:
+      tags:
+        - Kreditkarte
+      summary: "Eine Kreditkarte löschen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Erfolgreich gelöscht
+        "404":
+          description: Nicht gefunden
+
+
+
+
+  /kunde:
+    get:
+      tags:
+        - Kunde
+      summary: "Liste aller Kunden abrufen"
+      parameters:
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Liste der Kunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/AlleKunden"
+
+    post:
+      tags:
+        - Kunde
+      summary: "Einen neuen Kunden erstellen"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        "201":
+          description: Kunde erfolgreich erstellt
+
+  /kunde/{id}:
+    get:
+      tags:
+        - Kunde
+      summary: "Einen Kunden anzeigen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Kunde Objekt
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        "404":
+          description: Kunde nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    put:
+      tags:
+        - Kunde
+      summary: "Einen Kunden aktualisieren"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        "200":
+          description: Erfolgreich aktualisiert
+        "404":
+          description: Kunde nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    delete:
+      tags:
+        - Kunde
+      summary: "Einen Kunden löschen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Erfolgreich gelöscht
+        "404":
+          description: Kunde nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+
+
+
+  /zahlung:
+    get:
+      tags:
+        - Zahlung
+      summary: "Liste aller Kunden abrufen"
+      parameters:
+        - name: max
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Liste der Zahlungen
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/AlleZahlungen"
+
+    post:
+      tags:
+        - Zahlung
+      summary: "Eine neue Zahlung erstellen"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        "201":
+          description: Zahlung erfolgreich erstellt
+
+  /zahlung/{id}:
+    get:
+      tags:
+        - Zahlung
+      summary: "Eine Zahlung anzeigen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Zahlung Objekt
+          content:
+            multipart/form-data:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        "404":
+          description: Zahlung nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    put:
+      tags:
+        - Zahlung
+      summary: "Eine Zahlung aktualisieren"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        "200":
+          description: Erfolgreich aktualisiert
+        "404":
+          description: Zahlung nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+    delete:
+      tags:
+        - Zahlung
+      summary: "Eine Zahlung löschen"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Erfolgreich gelöscht
+        "404":
+          description: Zahlung nicht gefunden
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/404"
+
+
+
+
+components:
+  schemas:
+    404:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Beschreibung der Fehler
+        id:
+          type: number
+          description: ID des gefragten Objekts? Oder so
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID des Kreditkartenkontos
+        balance:
+          type: number
+          format: float
+          description: Kontostand
+    AlleKreditkartenkonten:
+      type: array
+      items:
+        $ref: '#/components/schemas/Kreditkartenkonto'
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID der Zahlung
+        amount:
+          type: number
+          format: float
+          description: Zahlungsbetrag
+    AlleZahlungen:
+      type: array
+      items:
+        $ref: '#/components/schemas/Zahlung'
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID des Inhabers
+        name:
+          type: string
+          description: Name des Inhabers
+    AlleInhaber:
+      type: array
+      items:
+        $ref: '#/components/schemas/Inhaber'
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID des Kunden
+        name:
+          type: string
+          description: Name des Kunden
+    AlleKunden:
+      type: array
+      items:
+        $ref: '#/components/schemas/Kunde'
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID der Kreditkarte
+        number:
+          type: string
+          description: Kartennummer
+    AlleKreditkarten:
+      type: array
+      items:
+        $ref: '#/components/schemas/Kreditkarte'
