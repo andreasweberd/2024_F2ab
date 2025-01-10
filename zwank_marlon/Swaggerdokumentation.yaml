@@ -1,0 +1,720 @@
+openapi: 3.0.0
+info:
+  title: Kreditkarte API
+  description: API zum Verwalten von Kreditkarten, Inhabern, Kunden, Kreditkartenkonten und Zahlungen
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Basis-URL der API
+
+paths:
+  /kreditkarte:
+    get:
+      tags:
+        - Kreditkarte
+      summary: Liste aller Kreditkarten abrufen
+      description: Gibt eine Liste aller verfügbaren Kreditkarten zurück.
+      parameters:
+        - name: max
+          in: query
+          description: Maximale Anzahl der zurückzugebenden Einträge
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit einer Liste von Kreditkarten.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kreditkarteCount:
+                    type: integer
+                    description: Anzahl der Kreditkarten
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkarte'
+        '400':
+          description: Ungültige Anfrage
+    post:
+      tags:
+        - Kreditkarte
+      summary: Neue Kreditkarte erstellen
+      description: Erstellt eine neue Kreditkarte mit den übermittelten Daten.
+      requestBody:
+        description: Kreditkarten-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '201':
+          description: Kreditkarte erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '400':
+          description: Validierungsfehler
+
+  /kreditkarte/{id}:
+    get:
+      tags:
+        - Kreditkarte
+      summary: Details einer Kreditkarte anzeigen
+      description: Gibt die Details einer bestimmten Kreditkarte zurück.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Kreditkarte
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Kreditkarten-Details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '404':
+          description: Kreditkarte nicht gefunden
+    put:
+      tags:
+        - Kreditkarte
+      summary: Kreditkarte aktualisieren
+      description: Aktualisiert die Daten einer Kreditkarte mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Kreditkarte
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Aktualisierte Kreditkarten-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '200':
+          description: Kreditkarte erfolgreich aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '400':
+          description: Validierungsfehler
+        '404':
+          description: Kreditkarte nicht gefunden
+    delete:
+      tags:
+        - Kreditkarte
+      summary: Kreditkarte löschen
+      description: Löscht eine Kreditkarte mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Kreditkarte
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Kreditkarte erfolgreich gelöscht.
+        '404':
+          description: Kreditkarte nicht gefunden
+
+  /kreditkartenkonto:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: Liste aller Kreditkartenkonten abrufen
+      description: Gibt eine Liste aller verfügbaren Kreditkartenkonten zurück.
+      parameters:
+        - name: max
+          in: query
+          description: Maximale Anzahl der zurückzugebenden Einträge
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit einer Liste von Kreditkartenkonten.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kreditkartenkontoCount:
+                    type: integer
+                    description: Anzahl der Kreditkartenkonten
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkartenkonto'
+        '400':
+          description: Ungültige Anfrage
+    post:
+      tags:
+        - Kreditkartenkonto
+      summary: Neues Kreditkartenkonto erstellen
+      description: Erstellt ein neues Kreditkartenkonto mit den übermittelten Daten.
+      requestBody:
+        description: Kreditkartenkonto-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '201':
+          description: Kreditkartenkonto erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '400':
+          description: Validierungsfehler
+
+  /kreditkartenkonto/{id}:
+    get:
+      tags:
+        - Kreditkartenkonto
+      summary: Details eines Kreditkartenkontos anzeigen
+      description: Gibt die Details eines bestimmten Kreditkartenkontos zurück.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kreditkartenkontos
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Kreditkartenkonto-Details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '404':
+          description: Kreditkartenkonto nicht gefunden
+    put:
+      tags:
+        - Kreditkartenkonto
+      summary: Kreditkartenkonto aktualisieren
+      description: Aktualisiert die Daten eines Kreditkartenkontos mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kreditkartenkontos
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Aktualisierte Kreditkartenkonto-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '200':
+          description: Kreditkartenkonto erfolgreich aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '400':
+          description: Validierungsfehler
+        '404':
+          description: Kreditkartenkonto nicht gefunden
+    delete:
+      tags:
+        - Kreditkartenkonto
+      summary: Kreditkartenkonto löschen
+      description: Löscht ein Kreditkartenkonto mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kreditkartenkontos
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Kreditkartenkonto erfolgreich gelöscht.
+        '404':
+          description: Kreditkartenkonto nicht gefunden
+
+  /inhaber:
+    get:
+      tags:
+        - Inhaber
+      summary: Liste aller Inhaber abrufen
+      description: Gibt eine Liste aller verfügbaren Inhaber zurück.
+      parameters:
+        - name: max
+          in: query
+          description: Maximale Anzahl der zurückzugebenden Einträge
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit einer Liste von Inhabern.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inhaberCount:
+                    type: integer
+                    description: Anzahl der Inhaber
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Inhaber'
+        '400':
+          description: Ungültige Anfrage
+    post:
+      tags:
+        - Inhaber
+      summary: Neuen Inhaber erstellen
+      description: Erstellt einen neuen Inhaber mit den übermittelten Daten.
+      requestBody:
+        description: Inhaber-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: Inhaber erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '400':
+          description: Validierungsfehler
+
+  /inhaber/{id}:
+    get:
+      tags:
+        - Inhaber
+      summary: Details eines Inhabers anzeigen
+      description: Gibt die Details eines bestimmten Inhabers zurück.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Inhabers
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Inhaber-Details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '404':
+          description: Inhaber nicht gefunden
+    put:
+      tags:
+        - Inhaber
+      summary: Inhaber aktualisieren
+      description: Aktualisiert die Daten eines Inhabers mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Inhabers
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Aktualisierte Inhaber-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '200':
+          description: Inhaber erfolgreich aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '400':
+          description: Validierungsfehler
+        '404':
+          description: Inhaber nicht gefunden
+    delete:
+      tags:
+        - Inhaber
+      summary: Inhaber löschen
+      description: Löscht einen Inhaber mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Inhabers
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Inhaber erfolgreich gelöscht.
+        '404':
+          description: Inhaber nicht gefunden
+
+  /kunde:
+    get:
+      tags:
+        - Kunde
+      summary: Liste aller Kunden abrufen
+      description: Gibt eine Liste aller Kunden zurück.
+      parameters:
+        - name: max
+          in: query
+          description: Maximale Anzahl der zurückzugebenden Einträge
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit einer Liste von Kunden.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kundeCount:
+                    type: integer
+                    description: Anzahl der Kunden
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kunde'
+        '400':
+          description: Ungültige Anfrage
+    post:
+      tags:
+        - Kunde
+      summary: Neuen Kunden erstellen
+      description: Erstellt einen neuen Kunden mit den übermittelten Daten.
+      requestBody:
+        description: Kunden-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '201':
+          description: Kunde erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '400':
+          description: Validierungsfehler
+
+  /kunde/{id}:
+    get:
+      tags:
+        - Kunde
+      summary: Details eines Kunden anzeigen
+      description: Gibt die Details eines bestimmten Kunden zurück.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kunden
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Kunden-Details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '404':
+          description: Kunde nicht gefunden
+    put:
+      tags:
+        - Kunde
+      summary: Kunden aktualisieren
+      description: Aktualisiert die Daten eines Kunden mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kunden
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Aktualisierte Kunden-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '200':
+          description: Kunde erfolgreich aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '400':
+          description: Validierungsfehler
+        '404':
+          description: Kunde nicht gefunden
+    delete:
+      tags:
+        - Kunde
+      summary: Kunden löschen
+      description: Löscht einen Kunden mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID des Kunden
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Kunde erfolgreich gelöscht.
+        '404':
+          description: Kunde nicht gefunden
+
+  /zahlung:
+    get:
+      tags:
+        - Zahlung
+      summary: Liste aller Zahlungen abrufen
+      description: Gibt eine Liste aller Zahlungen zurück.
+      parameters:
+        - name: max
+          in: query
+          description: Maximale Anzahl der zurückzugebenden Einträge
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit einer Liste von Zahlungen.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  zahlungCount:
+                    type: integer
+                    description: Anzahl der Zahlungen
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Zahlung'
+        '400':
+          description: Ungültige Anfrage
+    post:
+      tags:
+        - Zahlung
+      summary: Neue Zahlung erstellen
+      description: Erstellt eine neue Zahlung mit den übermittelten Daten.
+      requestBody:
+        description: Zahlung-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '201':
+          description: Zahlung erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '400':
+          description: Validierungsfehler
+
+  /zahlung/{id}:
+    get:
+      tags:
+        - Zahlung
+      summary: Details einer Zahlung anzeigen
+      description: Gibt die Details einer bestimmten Zahlung zurück.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Zahlung
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Zahlung-Details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '404':
+          description: Zahlung nicht gefunden
+    put:
+      tags:
+        - Zahlung
+      summary: Zahlung aktualisieren
+      description: Aktualisiert die Daten einer Zahlung mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Zahlung
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Aktualisierte Zahlung-Daten
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '200':
+          description: Zahlung erfolgreich aktualisiert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '400':
+          description: Validierungsfehler
+        '404':
+          description: Zahlung nicht gefunden
+    delete:
+      tags:
+        - Zahlung
+      summary: Zahlung löschen
+      description: Löscht eine Zahlung mit der angegebenen ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID der Zahlung
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Zahlung erfolgreich gelöscht.
+        '404':
+          description: Zahlung nicht gefunden
+
+components:
+  schemas:
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Eindeutige ID der Kreditkarte
+        kreditkartennummer:
+          type: string
+          description: nummer der Karte
+        Inhaber:
+          xml:
+            wrapped: true
+          type: array
+          items:  
+            $ref: '#/components/schemas/Inhaber'
+      required:
+        - kreditkartennummer
+        - Inhaber
+
+
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Eindeutige ID des Kreditkartenkontos
+        Kunde:
+          type: string
+          description: Kunde der zugeordneten Kreditkarte
+        kontoNummer:
+          type: string
+          description: Kontonummer des Kreditkartenkontos
+        Kreditkarte:
+          xml:
+            wrapped: true
+          type: array
+          items:  
+            $ref: '#/components/schemas/Kreditkarte'
+      required:
+        - Kunde
+        - kontoNummer
+        - Kreditkarte
+
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Eindeutige ID des Inhabers
+        vorname:
+          type: string
+          description: Vorname des Inhabers
+        nachname:
+          type: string
+          description: Nachname des Inhabers
+        geburtsdatum:
+          type: string
+          format: date
+          description: Geburtsdatum des Inhabers
+      required:
+        - vorname
+        - nachname
+        - geburtsdatum
+
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Eindeutige ID des Kunden
+        name:
+          type: string
+          description: Name des Kunden
+        adresse:
+          type: string
+          description: Adresse des Kunden
+        telefonnummer:
+          type: string
+          description: Telefonnummer des Kunden
+      required:
+        - name
+        - adresse
+        - telefonnummer
+
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Eindeutige ID der Zahlung
+        Kredikarte:
+          xml:
+            wrapped: true
+          type: array
+          items:  
+            $ref: '#/components/schemas/Kreditkarte'
+      required:
+      
