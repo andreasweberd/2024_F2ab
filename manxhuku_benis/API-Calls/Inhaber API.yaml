@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: Inhaber API
+  description: API documentation for managing Inhaber resources.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /inhaber:
+    get:
+      summary: List all Inhaber entries
+      description: Retrieve a paginated list of all Inhaber entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Inhaber entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Inhaber'
+                  inhaberCount:
+                    type: integer
+  /inhaber/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Inhaber.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Inhaber
+      description: Retrieve details of a specific Inhaber by ID.
+      responses:
+        '200':
+          description: Details of the requested Inhaber.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '404':
+          description: Inhaber not found.
+    put:
+      summary: Update an existing Inhaber
+      description: Update the details of an existing Inhaber by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '200':
+          description: Inhaber updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Inhaber not found.
+    delete:
+      summary: Delete an Inhaber
+      description: Delete an existing Inhaber by ID.
+      responses:
+        '204':
+          description: Inhaber deleted successfully.
+        '404':
+          description: Inhaber not found.
+  /inhaber/new:
+    post:
+      summary: Create a new Inhaber
+      description: Save a new Inhaber.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: Inhaber created successfully.
+        '400':
+          description: Validation error.
+
+components:
+  schemas:
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
