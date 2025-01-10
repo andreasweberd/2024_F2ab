@@ -1,0 +1,516 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: Unified API documentation for managing Inhaber, Kreditkarte, Kreditkartenkonto, Kunde, and Konto resources.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /inhaber:
+    get:
+      summary: List all Inhaber entries
+      description: Retrieve a paginated list of all Inhaber entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Inhaber entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Inhaber'
+                  inhaberCount:
+                    type: integer
+  /inhaber/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Inhaber.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Inhaber
+      description: Retrieve details of a specific Inhaber by ID.
+      responses:
+        '200':
+          description: Details of the requested Inhaber.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+        '404':
+          description: Inhaber not found.
+    put:
+      summary: Update an existing Inhaber
+      description: Update the details of an existing Inhaber by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '200':
+          description: Inhaber updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Inhaber not found.
+    delete:
+      summary: Delete an Inhaber
+      description: Delete an existing Inhaber by ID.
+      responses:
+        '204':
+          description: Inhaber deleted successfully.
+        '404':
+          description: Inhaber not found.
+  /inhaber/new:
+    post:
+      summary: Create a new Inhaber
+      description: Save a new Inhaber.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: Inhaber created successfully.
+        '400':
+          description: Validation error.
+
+  /kreditkarte:
+    get:
+      summary: List all Kreditkarten entries
+      description: Retrieve a paginated list of all Kreditkarten entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Kreditkarten entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkarte'
+                  kreditkarteCount:
+                    type: integer
+  /kreditkarte/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Kreditkarte.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Kreditkarte
+      description: Retrieve details of a specific Kreditkarte by ID.
+      responses:
+        '200':
+          description: Details of the requested Kreditkarte.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '404':
+          description: Kreditkarte not found.
+    put:
+      summary: Update an existing Kreditkarte
+      description: Update the details of an existing Kreditkarte by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '200':
+          description: Kreditkarte updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Kreditkarte not found.
+    delete:
+      summary: Delete a Kreditkarte
+      description: Delete an existing Kreditkarte by ID.
+      responses:
+        '204':
+          description: Kreditkarte deleted successfully.
+        '404':
+          description: Kreditkarte not found.
+  /kreditkarte/new:
+    post:
+      summary: Create a new Kreditkarte
+      description: Save a new Kreditkarte.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '201':
+          description: Kreditkarte created successfully.
+        '400':
+          description: Validation error.
+
+  /kreditkartenkonto:
+    get:
+      summary: List all Kreditkartenkonto entries
+      description: Retrieve a paginated list of all Kreditkartenkonto entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Kreditkartenkonto entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkartenkonto'
+                  kreditkartenkontoCount:
+                    type: integer
+  /kreditkartenkonto/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Kreditkartenkonto.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Kreditkartenkonto
+      description: Retrieve details of a specific Kreditkartenkonto by ID.
+      responses:
+        '200':
+          description: Details of the requested Kreditkartenkonto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkartenkonto'
+        '404':
+          description: Kreditkartenkonto not found.
+    put:
+      summary: Update an existing Kreditkartenkonto
+      description: Update the details of an existing Kreditkartenkonto by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '200':
+          description: Kreditkartenkonto updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Kreditkartenkonto not found.
+    delete:
+      summary: Delete a Kreditkartenkonto
+      description: Delete an existing Kreditkartenkonto by ID.
+      responses:
+        '204':
+          description: Kreditkartenkonto deleted successfully.
+        '404':
+          description: Kreditkartenkonto not found.
+  /kreditkartenkonto/new:
+    post:
+      summary: Create a new Kreditkartenkonto
+      description: Save a new Kreditkartenkonto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkartenkonto'
+      responses:
+        '201':
+          description: Kreditkartenkonto created successfully.
+        '400':
+          description: Validation error.
+
+  /kunde:
+    get:
+      summary: List all Kunde entries
+      description: Retrieve a paginated list of all Kunde entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Kunde entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kunde'
+                  kundeCount:
+                    type: integer
+  /kunde/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Kunde.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Kunde
+      description: Retrieve details of a specific Kunde by ID.
+      responses:
+        '200':
+          description: Details of the requested Kunde.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '404':
+          description: Kunde not found.
+    put:
+      summary: Update an existing Kunde
+      description: Update the details of an existing Kunde by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '200':
+          description: Kunde updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Kunde not found.
+    delete:
+      summary: Delete a Kunde
+      description: Delete an existing Kunde by ID.
+      responses:
+        '204':
+          description: Kunde deleted successfully.
+        '404':
+          description: Kunde not found.
+  /kunde/new:
+    post:
+      summary: Create a new Kunde
+      description: Save a new Kunde.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '201':
+          description: Kunde created successfully.
+        '400':
+          description: Validation error.
+
+  /konto:
+    get:
+      summary: List all Konto entries
+      description: Retrieve a paginated list of all Konto entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Konto entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Konto'
+                  kontoCount:
+                    type: integer
+  /konto/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Konto.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Konto
+      description: Retrieve details of a specific Konto by ID.
+      responses:
+        '200':
+          description: Details of the requested Konto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Konto'
+        '404':
+          description: Konto not found.
+    put:
+      summary: Update an existing Konto
+      description: Update the details of an existing Konto by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Konto'
+      responses:
+        '200':
+          description: Konto updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Konto not found.
+    delete:
+      summary: Delete a Konto
+      description: Delete an existing Konto by ID.
+      responses:
+        '204':
+          description: Konto deleted successfully.
+        '404':
+          description: Konto not found.
+  /konto/new:
+    post:
+      summary: Create a new Konto
+      description: Save a new Konto.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Konto'
+      responses:
+        '201':
+          description: Konto created successfully.
+        '400':
+          description: Validation error.
+
+components:
+  schemas:
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        cardNumber:
+          type: string
+        expirationDate:
+          type: string
+          format: date
+        cvv:
+          type: string
+
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+        cardNumber:
+          type: string
+        expirationDate:
+          type: string
+        cardHolder:
+          type: string
+
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+
+    Konto:
+      type: object
+      properties:
+        id:
+          type: integer
+        balance:
+          type: number
+          format: float
+        accountHolder:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
