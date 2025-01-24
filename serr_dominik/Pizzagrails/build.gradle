@@ -79,3 +79,5 @@ assets {
     minifyJs = true
     minifyCss = true
 }
+
+compile 'org.grails.plugins:swagger:3.0.2'

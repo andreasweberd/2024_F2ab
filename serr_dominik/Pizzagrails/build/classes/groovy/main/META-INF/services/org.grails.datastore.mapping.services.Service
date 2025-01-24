@@ -1,5 +1,6 @@
-org.iukf2.$InhaberServiceImplementation
-org.iukf2.$KreditkarteServiceImplementation
-org.iukf2.$KreditkartenkontoServiceImplementation
-org.iukf2.$KundeServiceImplementation
-org.iukf2.$ZahlungServiceImplementation
+org.iukf2.$CreditCardAccountServiceImplementation
+org.iukf2.$CreditCardServiceImplementation
+org.iukf2.$CustomerServiceImplementation
+org.iukf2.$LocationServiceImplementation
+org.iukf2.$OwnerServiceImplementation
+org.iukf2.$PaymentServiceImplementation

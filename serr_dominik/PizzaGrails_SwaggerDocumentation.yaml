@@ -1,0 +1,417 @@
+openapi: 3.0.1
+info:
+  title: Credit Card API
+  description: API documentation for managing credit cards, accounts, customers, and related entities.
+  version: 1.0.0
+
+paths:
+  /creditCards:
+    get:
+      summary: Get all credit cards
+      responses:
+        '200':
+          description: A list of credit cards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCard'
+    post:
+      summary: Create a new credit card
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCard'
+      responses:
+        '201':
+          description: Credit card created successfully
+
+  /creditCards/{id}:
+    get:
+      summary: Get a credit card by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A credit card object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCard'
+        '404':
+          description: Credit card not found
+    put:
+      summary: Update a credit card by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCard'
+      responses:
+        '200':
+          description: Credit card updated successfully
+    delete:
+      summary: Delete a credit card by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Credit card deleted successfully
+
+  /creditCardAccounts:
+    get:
+      summary: Get all credit card accounts
+      responses:
+        '200':
+          description: A list of credit card accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreditCardAccount'
+    post:
+      summary: Create a new credit card account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCardAccount'
+      responses:
+        '201':
+          description: Credit card account created successfully
+
+  /creditCardAccounts/{id}:
+    get:
+      summary: Get a credit card account by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A credit card account object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditCardAccount'
+        '404':
+          description: Credit card account not found
+    put:
+      summary: Update a credit card account by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditCardAccount'
+      responses:
+        '200':
+          description: Credit card account updated successfully
+    delete:
+      summary: Delete a credit card account by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Credit card account deleted successfully
+
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      summary: Create a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Customer created successfully
+
+  /customers/{id}:
+    get:
+      summary: Get a customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A customer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+    put:
+      summary: Update a customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Customer updated successfully
+    delete:
+      summary: Delete a customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted successfully
+
+  /locations:
+    get:
+      summary: Get all locations
+      responses:
+        '200':
+          description: A list of locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+    post:
+      summary: Create a new location
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '201':
+          description: Location created successfully
+
+  /locations/{id}:
+    get:
+      summary: Get a location by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A location object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Location not found
+    put:
+      summary: Update a location by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Location updated successfully
+    delete:
+      summary: Delete a location by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Location deleted successfully
+
+  /owners:
+    get:
+      summary: Get all owners
+      responses:
+        '200':
+          description: A list of owners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Owner'
+    post:
+      summary: Create a new owner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Owner'
+      responses:
+        '201':
+          description: Owner created successfully
+
+  /owners/{id}:
+    get:
+      summary: Get an owner by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An owner object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+        '404':
+          description: Owner not found
+    put:
+      summary: Update an owner by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Owner'
+      responses:
+        '200':
+          description: Owner updated successfully
+    delete:
+      summary: Delete an owner by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Owner deleted successfully
+
+components:
+  schemas:
+    CreditCard:
+      type: object
+      properties:
+        cardNumber:
+          type: string
+        owner:
+          $ref: '#/components/schemas/Owner'
+        creditCardAccount:
+          $ref: '#/components/schemas/CreditCardAccount'
+
+    CreditCardAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        customer:
+          $ref: '#/components/schemas/Customer'
+
+    Customer:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        customerID:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+
+    Location:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        town:
+          type: string
+        postalCode:
+          type: string
+
+    Owner:
+      type: object
+      properties:
+        name:
+          type: string
+        mail:
+          type: string
+        phoneNumber:
+          type: string

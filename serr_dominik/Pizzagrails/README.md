@@ -1,3 +1,6 @@
+## PizzaGrails Snippet by Dominik Serr
+
+---
 ## Grails 6.2.1 Documentation
 
 - [User Guide](https://docs.grails.org/6.2.1/guide/index.html)

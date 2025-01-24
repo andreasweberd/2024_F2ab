@@ -48,7 +48,7 @@ grails:
       - text/xml
       - application/xml
 dataSource:
-  driverClassName: org.postgresql.Driver
+  driverClassName: org.h2.Driver
   username: f2_iuk
   password: f2_iuk12345
   pooled: true
@@ -57,7 +57,7 @@ environments:
   development:
     dataSource:
       dbCreate: update
-      url: jdbc:postgresql://ee73530.online-server.cloud:80/f2_iuk
+      url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
   test:
     dataSource:
       dbCreate: update
