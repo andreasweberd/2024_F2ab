@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: API für Inhaber, Kreditkarte, Kreditkartenkonto, Kunde und Zahlung
+  description: API zur Verwaltung von Inhabern, Kreditkarten, Kreditkartenkonten, Kunden und Zahlungen
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Lokaler Server
+
+paths:
+  # Inhaber-Endpunkte
+  /inhaber:
+    get:
+      summary: Liste aller Inhaber
+      parameters:
+        - in: query
+          name: max
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Inhaber-Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Inhaber'
+
+    post:
+      summary: Neuen Inhaber erstellen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inhaber'
+      responses:
+        '201':
+          description: Inhaber erfolgreich erstellt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inhaber'
+
+  # Zahlung-Endpunkte
+  /zahlung:
+    get:
+      summary: Liste aller Zahlungen
+      parameters:
+        - in: query
+          name: max
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: Erfolgreiche Antwort mit Zahlungsliste
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zahlung'
+
+    post:
+      summary: Neue Zahlung erstellen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '201':
+          description: Zahlung erfolgreich erstellt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '400':
+          description: Validierungsfehler
+
+  /zahlung/{id}:
+    get:
+      summary: Zeige eine Zahlung
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Zahlung gefunden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '404':
+          description: Zahlung nicht gefunden
+
+    put:
+      summary: Aktualisiere eine Zahlung
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zahlung'
+      responses:
+        '200':
+          description: Zahlung erfolgreich aktualisiert
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zahlung'
+        '400':
+          description: Validierungsfehler
+
+    delete:
+      summary: Lösche eine Zahlung
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Zahlung erfolgreich gelöscht
+        '404':
+          description: Zahlung nicht gefunden
+
+components:
+  schemas:
+    Inhaber:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+        - name
+        - email
+
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+        vorname:
+          type: string
+        nachname:
+          type: string
+        email:
+          type: string
+          format: email
+      required:
+        - vorname
+        - nachname
+        - email
+
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+        kartennummer:
+          type: string
+        ablaufdatum:
+          type: string
+          format: date
+        inhaberId:
+          type: integer
+      required:
+        - kartennummer
+        - ablaufdatum
+        - inhaberId
+
+    Kreditkartenkonto:
+      type: object
+      properties:
+        id:
+          type: integer
+        kontonummer:
+          type: string
+        kreditkartenId:
+          type: integer
+        saldo:
+          type: number
+          format: double
+      required:
+        - kontonummer
+        - kreditkartenId
+        - saldo
+
+    Zahlung:
+      type: object
+      properties:
+        id:
+          type: integer
+        betrag:
+          type: number
+          format: double
+        zahlungsdatum:
+          type: string
+          format: date
+        kreditkartenkontoId:
+          type: integer
+      required:
+        - betrag
+        - zahlungsdatum
+        - kreditkartenkontoId

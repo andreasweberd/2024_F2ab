@@ -1,2 +1,5 @@
 .DS_Store
 .idea/
+*.class
+build
+/serr_dominik/Pizzagrails/.gradle/*

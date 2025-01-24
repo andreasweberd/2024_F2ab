@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Kreditkarte API
+  description: API-Dokumentation für die Verwaltung von Kreditkarten.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Lokaler Entwicklungsserver
+paths:
+  /kreditkarte:
+    get:
+      summary: Liste aller Kreditkarten
+      description: Abruf einer paginierten Liste aller Kreditkarten.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximale Anzahl der Einträge (Standard 10, maximal 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: Eine Liste von Kreditkarten.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kreditkarte'
+                  kreditkarteCount:
+                    type: integer
+  /kreditkarte/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID der Kreditkarte.
+        schema:
+          type: integer
+    get:
+      summary: Details einer Kreditkarte abrufen
+      description: Abruf der Details einer spezifischen Kreditkarte anhand ihrer ID.
+      responses:
+        '200':
+          description: Details der angeforderten Kreditkarte.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kreditkarte'
+        '404':
+          description: Kreditkarte nicht gefunden.
+    put:
+      summary: Kreditkarte aktualisieren
+      description: Aktualisierung der Details einer bestehenden Kreditkarte.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '200':
+          description: Kreditkarte erfolgreich aktualisiert.
+        '400':
+          description: Validierungsfehler.
+        '404':
+          description: Kreditkarte nicht gefunden.
+    delete:
+      summary: Kreditkarte löschen
+      description: Löschen einer bestehenden Kreditkarte anhand ihrer ID.
+      responses:
+        '204':
+          description: Kreditkarte erfolgreich gelöscht.
+        '404':
+          description: Kreditkarte nicht gefunden.
+  /kreditkarte/new:
+    post:
+      summary: Neue Kreditkarte erstellen
+      description: Speichern einer neuen Kreditkarte.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kreditkarte'
+      responses:
+        '201':
+          description: Kreditkarte erfolgreich erstellt.
+        '400':
+          description: Validierungsfehler.
+
+components:
+  schemas:
+    Kreditkarte:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        cardNumber:
+          type: string
+        expirationDate:
+          type: string
+          format: date
+        cvv:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

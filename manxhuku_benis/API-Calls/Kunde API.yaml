@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: Kunde API
+  description: API documentation for managing Kunde resources.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /kunde:
+    get:
+      summary: List all Kunde entries
+      description: Retrieve a paginated list of all Kunde entries.
+      parameters:
+        - name: max
+          in: query
+          required: false
+          description: Maximum number of entries to return (default 10, max 100).
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+      responses:
+        '200':
+          description: A list of Kunde entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Kunde'
+                  kundeCount:
+                    type: integer
+  /kunde/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the Kunde.
+        schema:
+          type: integer
+    get:
+      summary: Get details of a specific Kunde
+      description: Retrieve details of a specific Kunde by ID.
+      responses:
+        '200':
+          description: Details of the requested Kunde.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kunde'
+        '404':
+          description: Kunde not found.
+    put:
+      summary: Update an existing Kunde
+      description: Update the details of an existing Kunde by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '200':
+          description: Kunde updated successfully.
+        '400':
+          description: Validation error.
+        '404':
+          description: Kunde not found.
+    delete:
+      summary: Delete a Kunde
+      description: Delete an existing Kunde by ID.
+      responses:
+        '204':
+          description: Kunde deleted successfully.
+        '404':
+          description: Kunde not found.
+  /kunde/new:
+    post:
+      summary: Create a new Kunde
+      description: Save a new Kunde.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kunde'
+      responses:
+        '201':
+          description: Kunde created successfully.
+        '400':
+          description: Validation error.
+
+components:
+  schemas:
+    Kunde:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

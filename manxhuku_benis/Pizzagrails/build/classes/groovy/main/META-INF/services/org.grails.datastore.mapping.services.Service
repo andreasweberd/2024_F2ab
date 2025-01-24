@@ -1,0 +1,5 @@
+org.iukf2.$InhaberServiceImplementation
+org.iukf2.$KreditkartenkontoServiceImplementation
+org.iukf2.$KreditkarteServiceImplementation
+org.iukf2.$KundeServiceImplementation
+org.iukf2.$ZahlungServiceImplementation
